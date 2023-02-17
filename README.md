@@ -55,11 +55,11 @@ To this:
 
 ```c#
 
-private DispatchResolver Dispatcher = new FuncDispatchResolver(nameOfMethod: "Handle"); 
+private DispatchResolver Dispatcher = new FuncDispatchResolver<Func<object, object, OperationResult>>(nameOfMethod: "Handle"); 
 ...
 
 public OperationResult Dispatch(object dto) {
-   var handler = this.Dispatcher.GetFuncDelegate<OperationResult>(this.GetType(), dto.GetType());
+   var handler = this.Dispatcher.GetFuncDelegate(this.GetType(), dto.GetType());
    return handler(this, dto);
 }
 
